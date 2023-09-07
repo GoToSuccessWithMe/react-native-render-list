@@ -11,6 +11,7 @@ import {Auth} from '../screens/Auth';
 import {AuthNavigation} from './AuthNavigation';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AppContext} from '../store/AppContext';
+import {HomeNavigation} from './HomeNavigation';
 
 const screenOptions = {
   gestureEnabled: false,
@@ -29,13 +30,15 @@ function App(): JSX.Element {
     if (initializing) setInitializing(false);
   }
 
+  console.log('user', user);
+
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
 
     return subscriber;
   }, []);
 
-  if (true) {
+  if (!user) {
     return (
       <NavigationContainer ref={navigationRef}>
         <StatusBar barStyle={'light-content'} backgroundColor={colors.dark} />
@@ -47,33 +50,13 @@ function App(): JSX.Element {
     );
   }
 
-  // return (
-  //   <NavigationContainer ref={navigationRef}>
-  //     <AppStack.Navigator screenOptions={screenOptions} initialRouteName="Home">
-  //       <AppStack.Screen name="Home" component={HomeNavigation} />
-  //     </AppStack.Navigator>
-  //   </NavigationContainer>
-  // );
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <StatusBar barStyle={'light-content'} backgroundColor={colors.dark} />
+      <HomeNavigation />
+    </NavigationContainer>
+  );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
 

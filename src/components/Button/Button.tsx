@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: '600',
+    letterSpacing: 1.2,
   },
 });
