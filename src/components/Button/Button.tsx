@@ -1,12 +1,13 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, ViewStyle} from 'react-native';
+import {TouchableOpacity, StyleSheet, ViewStyle, TextStyle} from 'react-native';
 import {colors} from '../../styles/theme';
+import {Text} from '../Custom';
 
 interface Props {
   title: string;
   onPress: () => void;
   buttonStyle?: ViewStyle;
-  textStyle?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
 export const CustomButton: React.FC<Props> = ({

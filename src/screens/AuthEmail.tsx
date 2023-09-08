@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Alert, StyleSheet, TextInput, Text, View} from 'react-native';
+import {Alert, StyleSheet, TextInput, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {colors} from '../styles/theme';
 import auth from '@react-native-firebase/auth';
 import {CustomButton} from '../components/Button/Button';
 import {ModalLoader} from '../components/Loader/ModalLoader';
+import {Text} from '../components/Custom';
 
 export const AuthEmail: React.FC = () => {
   const [userName, setUserName] = useState('');

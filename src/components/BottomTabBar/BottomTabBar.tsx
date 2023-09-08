@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {colors} from '../../styles/theme';
+import {Text} from '../Custom/';
 
 interface Props extends BottomTabBarProps {}
 
@@ -59,14 +60,7 @@ export const BottomTabBar: React.FC<Props> = ({
             onPress={onPress}
             onLongPress={onLongPress}
             style={styles.item}>
-            <Text
-              style={{
-                color: colors.white,
-                fontWeight: '600',
-                marginTop: '2%',
-                fontSize: 20,
-                paddingVertical: 10,
-              }}>
+            <Text style={styles.itemText}>
               {typeof label === 'string' && label}
             </Text>
           </TouchableOpacity>
@@ -91,6 +85,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+  },
+  itemText: {
+    color: colors.white,
+    fontWeight: '600',
+    marginTop: '2%',
+    fontSize: 20,
+    paddingVertical: 10,
   },
   shadowProp: {
     shadowColor: '#171717',

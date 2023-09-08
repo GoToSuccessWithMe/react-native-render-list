@@ -1,8 +1,9 @@
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors} from '../styles/theme';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text} from 'react-native';
 import {BottomTabBar} from '../components/BottomTabBar/BottomTabBar';
+import {ProfileScreen} from '../screens/Profile';
+import {ShowNavigation} from './ShowNavigation';
 
 const screenOptions = {
   gestureEnabled: false,
@@ -19,22 +20,8 @@ export const HomeNavigation = () => {
       initialRouteName="Show"
       tabBar={props => <BottomTabBar {...props} />}
       sceneContainerStyle={{backgroundColor: colors.dark}}>
-      <BottomTabs.Screen
-        name="Show"
-        component={() => (
-          <SafeAreaView>
-            <Text>show</Text>
-          </SafeAreaView>
-        )}
-      />
-      <BottomTabs.Screen
-        name="Profile"
-        component={() => (
-          <SafeAreaView>
-            <Text>profile</Text>
-          </SafeAreaView>
-        )}
-      />
+      <BottomTabs.Screen name="Show" component={ShowNavigation} />
+      <BottomTabs.Screen name="Profile" component={ProfileScreen} />
     </BottomTabs.Navigator>
   );
 };

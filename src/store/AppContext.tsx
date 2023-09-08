@@ -1,33 +1,59 @@
 import React, {useState} from 'react';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {IPost} from '../types/Post';
+import {ITodo} from '../types/Todo';
 
 type Props = {
   children: React.ReactNode;
 };
 
+type AvailableList = 'posts' | 'todos';
+
+interface ItemLists {
+  posts: IPost[];
+  todos: ITodo[];
+}
+
 interface AppContextInterface {
   user: FirebaseAuthTypes.User | null;
   setUser: React.Dispatch<React.SetStateAction<FirebaseAuthTypes.User | null>>;
-  initializing: boolean;
-  setInitializing: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedList: AvailableList;
+  setSelectedList: React.Dispatch<React.SetStateAction<AvailableList>>;
+  availableLists: AvailableList[];
+  itemsLists: ItemLists;
+  setItemsLists: React.Dispatch<React.SetStateAction<ItemLists>>;
 }
 
 export const AppContext = React.createContext<AppContextInterface>({
   user: null,
   setUser: () => {},
-  initializing: false,
-  setInitializing: () => {},
+  availableLists: ['posts', 'todos'],
+  selectedList: 'posts',
+  setSelectedList: () => {},
+  itemsLists: {
+    posts: [],
+    todos: [],
+  },
+  setItemsLists: () => {},
 });
 
 export const AppContextProvider: React.FC<Props> = ({children}) => {
-  const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+  const availableLists: AvailableList[] = ['posts', 'todos'];
+  const [selectedList, setSelectedList] = useState<AvailableList>('posts');
+  const [itemsLists, setItemsLists] = useState<ItemLists>({
+    posts: [],
+    todos: [],
+  });
 
   const contextValue = {
-    initializing,
-    setInitializing,
     user,
     setUser,
+    availableLists,
+    selectedList,
+    setSelectedList,
+    itemsLists,
+    setItemsLists,
   };
 
   return (

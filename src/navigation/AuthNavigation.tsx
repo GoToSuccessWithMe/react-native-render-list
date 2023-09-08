@@ -5,7 +5,6 @@ import {Auth} from '../screens/Auth';
 import {AuthEmail} from '../screens/AuthEmail';
 
 const screenOptions = {
-  //   gestureEnabled: false,
   headerShown: false,
   contentStyle: {backgroundColor: colors.dark},
 };

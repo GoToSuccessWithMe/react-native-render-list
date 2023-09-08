@@ -4,7 +4,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {CustomButton} from '../components/Button/Button';
 import {GoogleSignIn} from '../components/GoogleSignIn/GoogleSignIn';
 
-export const Auth: React.FC = ({navigation}) => {
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+
+interface Props {
+  navigation: NavigationProp<ParamListBase>;
+}
+
+export const Auth: React.FC<Props> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.screenContainer}>
       <View style={styles.content}>

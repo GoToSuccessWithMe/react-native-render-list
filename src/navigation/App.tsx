@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {StatusBar, StyleSheet, Text} from 'react-native';
+import {StatusBar} from 'react-native';
 import {colors} from '../styles/theme';
 import {
   NavigationContainer,
@@ -7,7 +7,6 @@ import {
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SplashScreen} from '../screens/SplashScreen';
-import {Auth} from '../screens/Auth';
 import {AuthNavigation} from './AuthNavigation';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AppContext} from '../store/AppContext';
@@ -23,14 +22,11 @@ const AppStack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   const navigationRef = useNavigationContainerRef();
-  const {setUser, initializing, setInitializing, user} = useContext(AppContext);
+  const {setUser, user} = useContext(AppContext);
 
   function onAuthStateChanged(userToSet: FirebaseAuthTypes.User | null) {
     setUser(userToSet);
-    if (initializing) setInitializing(false);
   }
-
-  console.log('user', user);
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -59,17 +55,3 @@ function App(): JSX.Element {
 }
 
 export default App;
-
-{
-  /* <SafeAreaView style={backgroundStyle}>
-<StatusBar
-  barStyle={'light-content'}
-  backgroundColor={backgroundStyle.backgroundColor}
-/>
-<ScrollView
-  contentInsetAdjustmentBehavior="automatic"
-  style={{...backgroundStyle, flex: 1, height: 600}}>
-  <Text>asdggsa</Text>
-</ScrollView>
-</SafeAreaView> */
-}

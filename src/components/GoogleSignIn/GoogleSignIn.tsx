@@ -2,30 +2,27 @@ import React from 'react';
 import {CustomButton} from '../Button/Button';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import {Alert} from 'react-native';
 
 export const GoogleSignIn = () => {
   async function onGoogleButtonPress() {
-    console.log('start loading');
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
+    try {
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
 
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const {idToken} = await GoogleSignin.signIn();
 
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+      return auth().signInWithCredential(googleCredential);
+    } catch {
+      Alert.alert('Failed to login with Google');
+    }
   }
 
   return (
     <CustomButton
       title="Google Sign-In"
-      onPress={() =>
-        onGoogleButtonPress()
-          .then(() => console.log('Signed in with Google!'))
-          .catch(error => console.log('error', error))
-      }
+      onPress={() => onGoogleButtonPress()}
     />
   );
 };
